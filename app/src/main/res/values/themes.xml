@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.FurEver_Care" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Vet_Screen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/vet</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+    </style>
+
+    <style name="Fullscreen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="color">@color/vet</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="ButtonOwner">
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:backgroundTint">@color/owner</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonVet">
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:backgroundTint">@color/vet</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
+
+
+</resources>

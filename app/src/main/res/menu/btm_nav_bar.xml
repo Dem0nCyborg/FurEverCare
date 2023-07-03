@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/shop"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_bag_24"
+        android:title="Shopping"/>
+
+    <item
+        android:id="@+id/care"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:title="Care"/>
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Profile"/>
+
+</menu>
