@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "346148928712",
+    "project_id": "furever-care-fd411",
+    "storage_bucket": "furever-care-fd411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346148928712:android:f00af2cb91e9358b2df9fd",
+        "android_client_info": {
+          "package_name": "com.chandan.furever_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346148928712-1i5o4ik2hjnidq0b9r0m2rdv8vn43v59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF_HWG_fpDDDtcw-hYXagH9oXaW0_1gpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346148928712-1i5o4ik2hjnidq0b9r0m2rdv8vn43v59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

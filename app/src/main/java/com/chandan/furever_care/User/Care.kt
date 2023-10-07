@@ -19,6 +19,8 @@ class Care : AppCompatActivity() {
         binding= ActivityCareBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Hii1
+
         binding.btmNavBar.setSelectedItemId(R.id.care)
         binding.btmNavBar.setOnItemSelectedListener { item ->
             when (item.itemId)
@@ -49,7 +51,7 @@ class Care : AppCompatActivity() {
         }
 
         binding.floatingActionButton.setOnClickListener{
-            addDate()
+                //addDate()
         }
 
     }
