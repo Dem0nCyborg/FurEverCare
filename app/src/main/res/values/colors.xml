@@ -14,4 +14,6 @@
     <color name="txtclr">#48466D</color>
     <color name="txtclr1">#3D84A8</color>
 
+    <color name="accent">#ff7043</color>
+
 </resources>

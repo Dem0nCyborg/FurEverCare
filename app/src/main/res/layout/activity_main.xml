@@ -28,15 +28,66 @@
 
   </LinearLayout>
 
-  <LinearLayout
+  <RelativeLayout
       android:id="@+id/linearLayout2"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:orientation="horizontal"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/btm_nav_bar"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/linearLayout1"
-      app:layout_constraintBottom_toBottomOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+
+    <LinearLayout
+        android:id="@+id/ll_layout_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#E4E4E4"
+        android:orientation="horizontal">
+
+      <EditText
+          android:id="@+id/et_message"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:layout_weight=".5"
+          android:background="@drawable/round_button"
+          android:backgroundTint="@android:color/white"
+          android:hint="Search for..."
+          android:inputType="textShortMessage"
+          android:padding="10dp"
+          android:singleLine="true" />
+
+      <Button
+          android:id="@+id/btn_send"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_margin="10dp"
+          android:layout_weight="1"
+          android:theme="@style/ButtonVet"
+          android:backgroundTint="#26A69A"
+          android:text="Send"
+          android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_messages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_layout_bar"
+        android:layout_below="@+id/dark_divider"
+        tools:itemCount="20"
+        tools:listitem="@layout/msg_items" />
+
+    <View
+        android:id="@+id/dark_divider"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/bg" />
+
+  </RelativeLayout>
 
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
