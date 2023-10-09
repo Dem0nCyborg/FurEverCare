@@ -55,28 +55,7 @@ class Care : AppCompatActivity() {
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,petTypes)
         binding.acTv.setAdapter(adapter)
 
-        dbref = FirebaseDatabase.getInstance().getReference("Pets")
-        dbref.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (userSnapshot in snapshot.children){
-                        val pets = userSnapshot.getValue(PetData::class.java)
-                        petArrayList.add(pets!!)
-
-
-                    }
-                    petRecyclerView.adapter = PetAdapter(petArrayList)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-
-
+        getPetData()
 
 
         storageRef = FirebaseStorage.getInstance()
@@ -156,6 +135,25 @@ class Care : AppCompatActivity() {
     }
 
     private fun getPetData() {
+        dbref = FirebaseDatabase.getInstance().getReference("Pets")
+        dbref.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (userSnapshot in snapshot.children){
+                        val pets = userSnapshot.getValue(PetData::class.java)
+                        petArrayList.add(pets!!)
+
+
+                    }
+                    petRecyclerView.adapter = PetAdapter(petArrayList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
     }
 

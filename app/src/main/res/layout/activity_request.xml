@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Vet.Request">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        tools:listitem="@layout/request_list"
+        app:layout_constraintBottom_toTopOf="@id/btm_nav_vet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_nav_vet"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"

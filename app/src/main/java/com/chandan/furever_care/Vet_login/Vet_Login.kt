@@ -54,7 +54,7 @@ class Vet_Login : AppCompatActivity() {
 
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null){
-            val intent =Intent(this, Profile::class.java)
+            val intent =Intent(this, Request::class.java)
             startActivity(intent)
         }
     }
