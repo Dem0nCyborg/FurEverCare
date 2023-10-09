@@ -3,6 +3,7 @@ package com.chandan.furever_care.Vet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.chandan.furever_care.Login0
 import com.chandan.furever_care.R
 import com.chandan.furever_care.databinding.ActivityVetProfileBinding
 
@@ -39,6 +40,10 @@ class VetProfile : AppCompatActivity() {
 
         }
 
+        binding.logout.setOnClickListener {
+            startActivity(Intent(this,Login0::class.java))
+            finish()
+        }
 
     }
 }

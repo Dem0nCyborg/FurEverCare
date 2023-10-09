@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.chandan.furever_care.Login0
 import com.chandan.furever_care.R
 import com.chandan.furever_care.User_Login.User_Reg
 import com.chandan.furever_care.User_Login.User_login
@@ -36,7 +37,7 @@ class Profile : AppCompatActivity() {
 
         binding.ownupdt.setOnClickListener {
             Firebase.auth.signOut()
-            startActivity(Intent(this,User_login::class.java))
+            startActivity(Intent(this,Login0::class.java))
             finish()
         }
 
