@@ -27,14 +27,14 @@ class User_login : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth=FirebaseAuth.getInstance()
-        firebaseAuth = FirebaseAuth.getInstance()
+
 
         binding.uRegBtn.setOnClickListener {
             startActivity(Intent(this,User_Reg::class.java))
             Toast.makeText(this,"Get yourself registered..!",Toast.LENGTH_SHORT).show()
         }
 
-        val username1 = intent.getStringExtra("Username").toString()
+
 
         binding.uLgnBtn.setOnClickListener {
             val email = binding.uEmail.text.toString()
@@ -43,8 +43,7 @@ class User_login : AppCompatActivity() {
             if(email.isNotEmpty() && pass.isNotEmpty()){
                 firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener {
                     if (it.isSuccessful){
-                        val intent =Intent(this, Profile::class.java)
-                        intent.putExtra("Username1",username1)
+                        val intent =Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
@@ -56,5 +55,15 @@ class User_login : AppCompatActivity() {
 
         }
 
+    }
+
+    public override fun onStart() {
+        super.onStart()
+
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null){
+            val intent =Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
     }
 }

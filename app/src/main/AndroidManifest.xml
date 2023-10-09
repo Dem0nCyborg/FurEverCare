@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -42,17 +44,26 @@
         </activity>
         <activity
             android:name=".User.Care"
-            android:exported="false">
+            android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".User.Shop"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
+            <meta-data
+                android:name="com.razorpay.ApiKey"
+                android:value="rzp_test_eCUSn4OMmvjXEg" />
+            <meta-data
+                android:name="com.google.gms.wallet.api.enabled"
+                android:value="true" />
+
         </activity>
         <activity
             android:name=".resetpass"

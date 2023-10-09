@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".User.Care">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        tools:listitem="@layout/pets_list"
+        app:layout_constraintBottom_toTopOf="@id/btm_nav_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btm_nav_bar"
@@ -22,10 +35,177 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="404dp"
+        android:elevation="15dp"
+        android:src="@drawable/baseline_add_task"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btm_nav_bar"
+        android:layout_margin="20dp"
+         />
+
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/card_book_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btm_nav_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:foregroundGravity="center_vertical"
+        android:elevation="18dp"
+        app:cardCornerRadius="15dp"
+        android:backgroundTint="#E6E5E5"
+        android:visibility="gone"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/iv_pet"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/uploadyourlogo"
+                android:backgroundTint="#FF0000"
+                android:scaleType="centerCrop"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:backgroundTint="@color/black">
+
+                <EditText
+                    android:id="@+id/ed_name"
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Pet's Name"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:backgroundTint="@color/black">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/ac_tv"
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="\tWhat's your pet?"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:backgroundTint="@color/black"
+                    android:layout_weight="1"
+                    >
+
+                    <EditText
+                        android:id="@+id/ed_age"
+                        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="AGE"
+                        android:inputType="textCapWords"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:backgroundTint="@color/black"
+                    android:layout_weight="1"
+                    >
+
+                    <EditText
+                        android:id="@+id/ed_gender"
+                        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Gender"
+                        android:inputType="textCapWords"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:backgroundTint="@color/black">
+
+                <EditText
+                    android:id="@+id/ed_desc"
+                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Appoinment Needed for..."
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_req"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ButtonVet"
+                android:text="Request Appointment"
+                android:textColor="@color/txtclr"
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/montserrat"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
 
 
