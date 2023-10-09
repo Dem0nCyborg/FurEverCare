@@ -62,6 +62,8 @@ class Care : AppCompatActivity() {
                     for (userSnapshot in snapshot.children){
                         val pets = userSnapshot.getValue(PetData::class.java)
                         petArrayList.add(pets!!)
+
+
                     }
                     petRecyclerView.adapter = PetAdapter(petArrayList)
                 }
@@ -128,7 +130,7 @@ class Care : AppCompatActivity() {
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
                             val databaseReference = FirebaseDatabase.getInstance().getReference("Pets")
-                            databaseReference.child(userId).setValue(petData)
+                            databaseReference.child(userId+petName).setValue(petData)
                                 .addOnSuccessListener {
                                     binding.cardBookApp.visibility = View.GONE
                                     binding.edName.setText("")
