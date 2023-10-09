@@ -43,8 +43,9 @@ class User_Reg : AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener {
                     if (it.isSuccessful){
                         database = FirebaseDatabase.getInstance().getReference("Users")
+                        val uid = FirebaseAuth.getInstance().currentUser!!.uid
                         val User  = User(username,number,email,address)
-                        database.child(username).setValue(User).addOnCompleteListener { Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show() }
+                        database.child(uid).setValue(User).addOnCompleteListener { Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show() }
                         val intent =Intent(this,Profile::class.java)
                         val intent1 = Intent(this,User_login::class.java)
                         intent1.putExtra("Username",username)

@@ -6,9 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.chandan.furever_care.R
 import com.chandan.furever_care.User_Login.User_Reg
+import com.chandan.furever_care.User_Login.User_login
 import com.chandan.furever_care.databinding.ActivityProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Profile : AppCompatActivity() {
 
@@ -20,10 +29,16 @@ class Profile : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("Username").toString()
-        val username1 = intent.getStringExtra("Username1").toString()
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-        readData(username)
+        readData(uid)
+
+        binding.ownupdt.setOnClickListener {
+            Firebase.auth.signOut()
+            startActivity(Intent(this,User_login::class.java))
+            finish()
+        }
 
 
 
@@ -60,20 +75,22 @@ class Profile : AppCompatActivity() {
 
 
 
-    private fun readData(username : String) {
-        database = FirebaseDatabase.getInstance().getReference("Users")
-        database.child(username).get().addOnSuccessListener {
-            val username = it.child("username").value
-            val email = it.child("email").value
-            val contact = it.child("phone").value
-            val address = it.child("address").value
 
-            binding.ownname.text = username.toString()
-            binding.ownemail.text = email.toString()
-            binding.owncontct.text = contact.toString()
-            binding.ownadd.text = address.toString()
+    private fun readData(uid: String) {
+        runOnUiThread {
+        val database = FirebaseDatabase.getInstance().getReference("Users")
+        database.child(uid).get().addOnSuccessListener { dataSnapshot ->
+            val username = dataSnapshot.child("username").value
+            val email = dataSnapshot.child("email").value
+            val contact = dataSnapshot.child("phone").value
+            val address = dataSnapshot.child("address").value
 
+
+                binding.ownname.text = username?.toString()
+                binding.ownemail.text = email?.toString()
+                binding.owncontct.text = contact?.toString()
+                binding.ownadd.text = address?.toString()
+            }
         }
-
     }
 }
