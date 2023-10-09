@@ -6,10 +6,16 @@ import android.os.Bundle
 import com.chandan.furever_care.Login0
 import com.chandan.furever_care.R
 import com.chandan.furever_care.databinding.ActivityVetProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class VetProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityVetProfileBinding
+    private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +46,36 @@ class VetProfile : AppCompatActivity() {
 
         }
 
+
         binding.logout.setOnClickListener {
+            Firebase.auth.signOut()
             startActivity(Intent(this,Login0::class.java))
             finish()
         }
 
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        readData(uid)
+
+
     }
+
+    private fun readData(uid: String) {
+        runOnUiThread {
+            val database = FirebaseDatabase.getInstance().getReference("Vets")
+            database.child(uid).get().addOnSuccessListener { dataSnapshot ->
+                val username = dataSnapshot.child("username").value
+                val email = dataSnapshot.child("email").value
+                val contact = dataSnapshot.child("phone").value
+                val qualification = dataSnapshot.child("qualification").value
+
+
+                binding.vetname.text = username?.toString()
+                binding.vetemail.text = email?.toString()
+                binding.vetcontct.text = contact?.toString()
+                binding.vetqualifications.text = qualification?.toString()
+            }
+        }
+    }
+
 }
