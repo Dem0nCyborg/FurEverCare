@@ -8,10 +8,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chandan.furever_care.R
 import com.chandan.furever_care.databinding.ActivityCareBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.FirebaseStorageKtxRegistrar
@@ -22,6 +28,9 @@ class Care : AppCompatActivity() {
     private lateinit var binding: ActivityCareBinding
 
     //Firebase
+    private lateinit var dbref : DatabaseReference
+    private lateinit var petRecyclerView: RecyclerView
+    private lateinit var petArrayList: ArrayList<PetData>
     private var storageRef = Firebase.storage
     private lateinit var uri : Uri
 
@@ -36,18 +45,39 @@ class Care : AppCompatActivity() {
         binding= ActivityCareBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
+        petRecyclerView = binding.recyclerview
+        petRecyclerView.layoutManager = LinearLayoutManager(this)
+        petRecyclerView.hasFixedSize()
+        petArrayList = arrayListOf()
 
 
         val petTypes = resources.getStringArray(R.array.animalTypes)
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,petTypes)
         binding.acTv.setAdapter(adapter)
 
+        dbref = FirebaseDatabase.getInstance().getReference("Pets")
+        dbref.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (userSnapshot in snapshot.children){
+                        val pets = userSnapshot.getValue(PetData::class.java)
+                        petArrayList.add(pets!!)
+                    }
+                    petRecyclerView.adapter = PetAdapter(petArrayList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+
+
 
         storageRef = FirebaseStorage.getInstance()
-
-
 
         binding.btmNavBar.setSelectedItemId(R.id.care)
         binding.btmNavBar.setOnItemSelectedListener { item ->
@@ -93,11 +123,12 @@ class Care : AppCompatActivity() {
                             val age = binding.edAge.text.toString()
                             val gender = binding.edGender.text.toString()
                             val desc = binding.edDesc.text.toString()
-                            val petData = PetDetails(it.toString(),petName,petType,age,gender,desc)
+                            val status = "Pending"
+                            val petData = PetDetails(it.toString(),petName,petType,age,gender,desc,status)
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
-                            val databaseReference = FirebaseDatabase.getInstance().getReference("Users")
-                            databaseReference.child(userId).child(petName).setValue(petData)
+                            val databaseReference = FirebaseDatabase.getInstance().getReference("Pets")
+                            databaseReference.child(userId).setValue(petData)
                                 .addOnSuccessListener {
                                     binding.cardBookApp.visibility = View.GONE
                                     binding.edName.setText("")
@@ -114,6 +145,15 @@ class Care : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener{
                 binding.cardBookApp.visibility = View.VISIBLE
         }
+
+
+
+
+
+
+    }
+
+    private fun getPetData() {
 
     }
 
