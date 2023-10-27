@@ -89,7 +89,7 @@ class Request : AppCompatActivity() {
                             val pets = userSnapshot.getValue(PetData::class.java)
                             petArrayList.add(pets!!)
                             for(key in petArrayList){
-                                if (key.status!!.contains("Rejected$uid",ignoreCase = true)){
+                                if (key.status!!.contains("Rejected$uid",ignoreCase = true) || key.status!!.contains("Accept$uid",ignoreCase = true) ){
                                     petArrayList.remove(key)
                                 }
                             }
@@ -114,6 +114,7 @@ class Request : AppCompatActivity() {
                                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
                                 val status = "Pending"
                                 dbreference.setValue("Rejected$uid")
+                                Toast.makeText(this@Request,"Rejected",Toast.LENGTH_SHORT).show()
 
 
 

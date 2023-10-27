@@ -49,6 +49,7 @@ class Care : AppCompatActivity() {
         petRecyclerView.layoutManager = LinearLayoutManager(this)
         petRecyclerView.hasFixedSize()
         petArrayList = arrayListOf()
+        petArrayList.clear()
 
 
         val petTypes = resources.getStringArray(R.array.animalTypes)
@@ -118,6 +119,7 @@ class Care : AppCompatActivity() {
                                     binding.edAge.setText("")
                                     binding.edGender.setText("")
                                     binding.edDesc.setText("")
+                                    binding.btnReq.visibility = View.GONE
                                 }
                         }
 
