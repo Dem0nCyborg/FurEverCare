@@ -182,7 +182,12 @@ class MainActivity : AppCompatActivity() {
 
         shortsAdapter = ShortsAdapter(shortsList)
         recyclerView.adapter = shortsAdapter
+        shortsAdapter.setOnItemClickListener(object : ShortsAdapter.onItemClickListener{
+            override fun onClick(position: Int) {
+                startActivity(Intent(this@MainActivity,Reels::class.java))
+            }
 
+        })
     }
 
     private fun addDataToList(){
