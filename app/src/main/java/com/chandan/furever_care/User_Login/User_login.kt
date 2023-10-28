@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.chandan.furever_care.R
 import com.chandan.furever_care.User.MainActivity
 import com.chandan.furever_care.User.Profile
+import com.chandan.furever_care.User.Reels
 import com.chandan.furever_care.User.Shop
 import com.chandan.furever_care.databinding.ActivityUserLoginBinding
 
@@ -62,7 +63,7 @@ class User_login : AppCompatActivity() {
 
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null){
-            val intent =Intent(this, Profile::class.java)
+            val intent =Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

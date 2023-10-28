@@ -11,14 +11,29 @@ import com.chandan.furever_care.R
 class ShortsAdapter (private val ShortsList : List<Shorts_Data>):
     RecyclerView.Adapter<ShortsAdapter.ShortsViewHolder>() {
 
-    class ShortsViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
+    private lateinit var mlistener : onItemClickListener
+    interface onItemClickListener{
+        fun onClick(position : Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mlistener = listener
+    }
+    class ShortsViewHolder (itemView: View,listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
         val shortsImgView : ImageView = itemView.findViewById(R.id.list_img)
         val shortsNameTv : TextView = itemView.findViewById(R.id.list_tv)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onClick(adapterPosition)
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShortsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.shorts_list , parent ,false)
-        return ShortsViewHolder(view)
+        return ShortsViewHolder(view,mlistener)
     }
 
     override fun getItemCount(): Int {

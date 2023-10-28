@@ -13,8 +13,8 @@
     <string name="ppownr">PROUD PET OWNER</string>
     <string name="vs">VETERINARY SUPERHERO</string>
     <string name="vetqualifications"><![CDATA[B.V.Sc. & AH]]></string>
-    
-    
+
+
     <string-array name="animalTypes">
         <item>Dog</item>
         <item>Cat</item>
