@@ -49,6 +49,7 @@ class Care : AppCompatActivity() {
         petRecyclerView.layoutManager = LinearLayoutManager(this)
         petRecyclerView.hasFixedSize()
         petArrayList = arrayListOf()
+        petArrayList.clear()
 
 
         val petTypes = resources.getStringArray(R.array.animalTypes)
@@ -105,9 +106,10 @@ class Care : AppCompatActivity() {
                             val gender = binding.edGender.text.toString()
                             val desc = binding.edDesc.text.toString()
                             val status = "Pending"
-                            val petData = PetDetails(it.toString(),petName,petType,age,gender,desc,status)
-                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
+                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                            val key = userId+petName
+                            val petData = PetDetails(key,it.toString(),petName,petType,age,gender,desc,status)
                             val databaseReference = FirebaseDatabase.getInstance().getReference("Pets")
                             databaseReference.child(userId+petName).setValue(petData)
                                 .addOnSuccessListener {
@@ -117,6 +119,7 @@ class Care : AppCompatActivity() {
                                     binding.edAge.setText("")
                                     binding.edGender.setText("")
                                     binding.edDesc.setText("")
+                                    binding.btnReq.visibility = View.GONE
                                 }
                         }
 

@@ -3,6 +3,7 @@ package com.chandan.furever_care.Vet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chandan.furever_care.R
@@ -13,6 +14,7 @@ import com.chandan.furever_care.User.PetData
 import com.chandan.furever_care.User.Profile
 import com.chandan.furever_care.User.Shop
 import com.chandan.furever_care.databinding.ActivityRequestBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -29,6 +31,7 @@ class Request : AppCompatActivity() {
     private lateinit var petRecyclerView: RecyclerView
     private lateinit var petArrayList: ArrayList<PetData>
     private var storageRef = Firebase.storage
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,13 +83,48 @@ class Request : AppCompatActivity() {
             dbref.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()){
+                        petArrayList.clear()
                         for (userSnapshot in snapshot.children){
+                            val uid = FirebaseAuth.getInstance().currentUser!!.uid
                             val pets = userSnapshot.getValue(PetData::class.java)
                             petArrayList.add(pets!!)
-
+                            for(key in petArrayList){
+                                if (key.status!!.contains("Rejected$uid",ignoreCase = true) || key.status!!.contains("Accept$uid",ignoreCase = true) ){
+                                    petArrayList.remove(key)
+                                }
+                            }
 
                         }
-                        petRecyclerView.adapter = RequestAdap(petArrayList)
+
+
+
+                        var adapter = RequestAdap(petArrayList)
+                        petRecyclerView.adapter = adapter
+                        adapter.setOnItemCLickListner(object : RequestAdap.onButtonClickListner{
+                            override fun onClickAccept(position: Int) {
+                                val databaseref = FirebaseDatabase.getInstance().getReference("Pets/${petArrayList[position].key}/status")
+                                val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                                val status = "Pending"
+                                databaseref.setValue("Accept$uid")
+                                Toast.makeText(this@Request,"Accepted",Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onClickDecline(position: Int) {
+                                val dbreference = FirebaseDatabase.getInstance().getReference("Pets/${petArrayList[position].key}/status")
+                                val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                                val status = "Pending"
+                                dbreference.setValue("Rejected$uid")
+                                Toast.makeText(this@Request,"Rejected",Toast.LENGTH_SHORT).show()
+
+
+
+
+
+
+                            }
+
+                        })
+
                     }
                 }
 
